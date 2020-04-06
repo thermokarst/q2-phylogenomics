@@ -7,7 +7,7 @@ on:
       - master
 
 jobs:
-  lint-plugin:
+  lint:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -24,8 +24,8 @@ jobs:
         pip install -q flake8
         flake8
 
-  build-and-test-plugin:
-    needs: lint-plugin
+  build-and-test:
+    needs: lint
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
@@ -34,6 +34,8 @@ jobs:
     - uses: actions/checkout@v2
     # for versioneer
     - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
+    # debugging
+    - run: git tag -l
     - uses: qiime2/action-library-packaging@alpha1
       with: 
         plugin-name: q2-phylogenomics
