@@ -32,6 +32,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     # for versioneer
     - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
     # debugging
