@@ -1,4 +1,4 @@
-name: build-test
+name: lint-build-test
 # build on every PR and commit to master
 on:
   pull_request:
@@ -24,7 +24,7 @@ jobs:
         pip install -q flake8
         flake8
 
-  build-and-test-example-plugin:
+  build-and-test-plugin:
     needs: lint-plugin
     strategy:
       matrix:
@@ -32,6 +32,8 @@ jobs:
     runs-on: ${{ matrix.os }}
     steps:
     - uses: actions/checkout@v2
+    # for versioneer
+    - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/*
     - uses: qiime2/action-library-packaging@alpha1
       with: 
         plugin-name: q2-phylogenomics
