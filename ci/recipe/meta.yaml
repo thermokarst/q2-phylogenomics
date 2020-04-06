@@ -28,8 +28,8 @@ requirements:
 
 test:
   imports:
-    - q2_prinseq
-    - qiime2.plugins.prinseq
+    - q2_phylogenomics
+    - qiime2.plugins.phylogenomics
 
 about:
   home: https://qiime2.org
